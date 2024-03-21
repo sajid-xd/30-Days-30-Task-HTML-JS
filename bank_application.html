@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simple Bank Application</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <style>header{
+        text-align: center;
+        padding: 20px;
+    }</style>
+    
+    <header><h3>Task#8 Bank Application <br>
+        Team-Code bridge</h3></header>
+<div class="container mt-5">
+<h2 class="mb-4">Bank Application</h2>
+
+<div class="mb-3">
+    <label for="newAccountName" class="form-label">New Account Name:</label>
+    <input type="text" class="form-control" id="newAccountName">
+</div>
+<div class="mb-3">
+    <label for="initialBalance" class="form-label">Initial Balance:</label>
+    <input type="number" class="form-control" id="initialBalance">
+    <button type="button" class="btn btn-primary mt-2" onclick="createAccount()">Create Account</button>
+</div>
+
+<hr>
+
+<div class="mb-3">
+    <label for="accountName" class="form-label">Account Name:</label>
+    <input type="text" class="form-control" id="accountName">
+</div>
+<div class="mb-3">
+    <label for="transactionAmount" class="form-label">Amount:</label>
+    <input type="number" class="form-control" id="transactionAmount">
+</div>
+<button type="button" class="btn btn-success mb-3" onclick="deposit()">Deposit</button>
+<button type="button" class="btn btn-danger mb-3" onclick="withdraw()">Withdraw</button>
+
+<p>Account Details:</p>
+<div id="accountDetails"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+function createAccount() {
+    var accountName = document.getElementById("newAccountName").value.trim();
+    var initialBalance = parseFloat(document.getElementById("initialBalance").value);
+
+    if (accountName === "") {
+        alert("Please enter an account name.");
+        return;
+    }
+    if (isNaN(initialBalance) || initialBalance <= 0) {
+        alert("Please enter a valid initial balance.");
+        return;
+    }
+
+    localStorage.setItem(accountName, initialBalance.toFixed(2));
+
+    alert("Account created successfully.");
+    displayAccountDetails();
+}
+
+function deposit() {
+    var accountName = document.getElementById("accountName").value.trim();
+    var transactionAmount = parseFloat(document.getElementById("transactionAmount").value);
+
+    if (!localStorage.getItem(accountName)) {
+        alert("Account does not exist.");
+        return;
+    }
+    if (isNaN(transactionAmount) || transactionAmount <= 0) {
+        alert("Please enter a valid transaction amount.");
+        return;
+    }
+
+    var currentBalance = parseFloat(localStorage.getItem(accountName));
+    var newBalance = currentBalance + transactionAmount;
+    localStorage.setItem(accountName, newBalance.toFixed(2));
+
+    alert("Deposit successful.");
+    displayAccountDetails();
+}
+
+function withdraw() {
+    var accountName = document.getElementById("accountName").value.trim();
+    var transactionAmount = parseFloat(document.getElementById("transactionAmount").value);
+
+    if (!localStorage.getItem(accountName)) {
+        alert("Account does not exist.");
+        return;
+    }
+    if (isNaN(transactionAmount) || transactionAmount <= 0) {
+        alert("Please enter a valid transaction amount.");
+        return;
+    }
+
+    var currentBalance = parseFloat(localStorage.getItem(accountName));
+    if (transactionAmount > currentBalance) {
+        alert("Insufficient balance.");
+        return;
+    }
+
+    var newBalance = currentBalance - transactionAmount;
+    localStorage.setItem(accountName, newBalance.toFixed(2));
+
+    alert("Withdrawal successful.");
+    displayAccountDetails();
+}
+
+function displayAccountDetails() {
+    var accountDetailsDiv = document.getElementById("accountDetails");
+    accountDetailsDiv.innerHTML = "";
+
+    for (var i = 0; i < localStorage.length; i++) {
+        var accountName = localStorage.key(i);
+        var balance = parseFloat(localStorage.getItem(accountName)).toFixed(2);
+
+        var accountInfo = document.createElement("div");
+        accountInfo.innerHTML = "Account Name: " + accountName + " - Balance: $" + balance;
+
+        var deleteButton = document.createElement("button");
+        deleteButton.textContent = "Delete";
+        deleteButton.className = "btn btn-sm btn-danger ms-2";
+        deleteButton.onclick = (function(accountName) {
+            return function() {
+                deleteAccount(accountName);
+            }
+        })(accountName);
+        accountInfo.appendChild(deleteButton);
+
+        accountDetailsDiv.appendChild(accountInfo);
+    }
+}
+
+function deleteAccount(accountName) {
+    if (confirm("Are you sure you want to delete the account?")) {
+        localStorage.removeItem(accountName);
+        displayAccountDetails();
+    }
+}
+
+displayAccountDetails();
+</script>
+
+</body>
+</html>
