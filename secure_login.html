@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Secure Login</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <style>
+    body {
+      background-image: url(./1.jpg);
+      background-size: cover;
+    }
+
+    header {
+      text-align: center;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 10px;
+    }
+
+    .container {
+      margin-top: 24vh;
+    }
+
+    .card-body {
+      padding: 30px;
+      box-shadow: 0 2px 35px whitesmoke;
+      background-color: rgb(140, 70, 206);
+      color: rgb(255, 255, 255);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .btn {
+      background-color: black;
+      font-weight: bold;
+      width: 50%;
+      margin-left: 120px;
+      border: none;
+    }
+
+    footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-weight: bold;
+    }
+  </style>
+
+  <header>
+    <h1>Task#6 Secure Login</h1>
+  </header>
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="card-title text-center">Login</h2>
+            <form id="loginForm">
+              <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" class="form-control" id="username" name="username" required>
+              </div>
+              <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block">Login</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <h4>TEAM-Code bridge</h4>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+    function hashPassword(password) {
+      let hexPassword = '';
+      for (let i = 0; i < password.length; i++) {
+        let hexCharCode = password.charCodeAt(i).toString(16);
+        hexPassword += hexCharCode.length < 2 ? '0' + hexCharCode : hexCharCode;
+      }
+      return hexPassword;
+    }
+
+    function login() {
+      var username = document.getElementById("username").value;
+      var password = document.getElementById("password").value;
+      var hashedPassword = hashPassword(password);
+      if (username === "Aptech" && hashedPassword === "617074656368313233") {
+        alert("Login successful");
+      } else {
+        alert("Login failed. Please check your username and password.");
+      }
+    }
+
+    document.getElementById("loginForm").addEventListener("submit", function (event) {
+      event.preventDefault();
+      login();
+    });
+  </script>
+
+</body>
+
+</html>
