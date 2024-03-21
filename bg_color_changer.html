@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Background Color Changer</title>
+<style>
+    .main {
+        transition: background-color 0.5s ease;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80vh;
+    }
+    .container {
+        text-align: center;
+    }
+    .container h3{
+        margin-right: 45%;
+    }
+    h1{
+        text-align: center;
+        background-color: black;
+        color: white;
+    }
+    .color-picker {
+        width: 200px;
+        height: 40px;
+        margin-bottom: 20px;
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        outline: none;
+        cursor: pointer;
+        background-color: #007bff;
+    }
+    .color-picker:hover {
+        background-color: black;
+    }
+    button {
+        border: none;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+    }
+    button:hover {
+        background-color: black;
+    }
+</style>
+</head>
+<body>
+    <h1>Select Your Color</h1>
+    <div class="main">
+    <div class="container">
+    <h3>Select Here</h3>
+    <input type="color" class="color-picker">
+    <button onclick="changeBackgroundColor()">Change Color</button>
+</div>
+
+<script>
+function changeBackgroundColor() {
+    var colorPicker = document.querySelector('.color-picker');
+    var selectedColor = colorPicker.value;
+    document.body.style.backgroundColor = selectedColor;
+}
+</script>
+</div>
+</body>
+</html>
