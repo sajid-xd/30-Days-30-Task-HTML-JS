@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Secure Notes</title>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <style>header{
+        text-align: center;
+        padding: 20px;
+    }</style>
+    <header><h3>Task#9 Secure Notes <br>
+        Team-Code bridge</h3></header>
+    <div class="container">
+        <h1 class="text-center mt-5">Secure Notes</h1>
+        <h4>Add Notes:</h4>
+        <div class="form-group mt-3">
+            <input type="text" id="noteInput" class="form-control" placeholder="Enter your note" style="height: 100px;">
+        </div>
+        <div class="form-group">
+            <button onclick="saveNote()" class="btn btn-primary">Save Note</button>
+        </div>
+        <h3>My Notes</h3>
+        <div id="notes" class="mt-4"></div>
+    </div>
+    <script>
+        function saveNote() {
+            var noteInput = document.getElementById("noteInput");
+            var note = noteInput.value.trim();
+            if (!note) {
+                alert("Please enter a note.");
+                return;
+            }
+            var notes = JSON.parse(localStorage.getItem("notes") || "[]");
+            notes.push(note);
+            localStorage.setItem("notes", JSON.stringify(notes));
+            noteInput.value = "";
+            displayNotes();
+            alert("Note saved successfully.");
+        }
+        function displayNotes() {
+            var notesContainer = document.getElementById("notes");
+            var notes = JSON.parse(localStorage.getItem("notes") || "[]");
+            notesContainer.innerHTML = notes.map((note, index) => `
+                <div class="card mb-2">
+                    <div class="card-body">${note} 
+                        <button onclick="deleteNote(${index})" class="btn btn-danger btn-sm ml-2">Delete</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        function deleteNote(index) {
+            var notes = JSON.parse(localStorage.getItem("notes") || "[]");
+            notes.splice(index, 1);
+            localStorage.setItem("notes", JSON.stringify(notes));
+            displayNotes();
+            alert("Note deleted successfully.");
+        }
+        displayNotes();
+    </script>
+</body>
+</html>
