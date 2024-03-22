@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Checkerboard Generator</title>
+      <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+      <style>
+         header {
+         text-align: center;
+         padding: 20px
+         }
+         .main {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         height: 50vh;
+         }
+         .square {
+         width: 50px;
+         height: 50px;
+         }
+         #boardContainer{
+         display: flex;
+         justify-content: center;
+         margin-bottom: 40px;
+         }
+      </style>
+   </head>
+   <body>
+      <header>
+         <h3>Task#12  Checkerboard Generator <br> Team-Code bridge</h3>
+      </header>
+      <div class="main">
+         <div class="container">
+            <div id="configContainer">
+               <form id="configForm">
+                  <div class="form-group">
+                     <label for="rows">Add Rows:</label>
+                     <input type="number" class="form-control" id="rows" name="rows" min="1" value="6" min="2" max="35">
+                  </div>
+                  <div class="form-group">
+                     <label for="cols">Add Columns:</label>
+                     <input type="number" class="form-control" id="cols" name="cols" min="1" value="6" min="2" max="35">
+                  </div>
+                  <div class="form-group">
+                     <label for="lightColor">First Color:</label>
+                     <input type="color" class="form-control" id="lightColor" name="lightColor" value="#afffff">
+                  </div>
+                  <div class="form-group">
+                     <label for="darkColor">Second Color:</label>
+                     <input type="color" class="form-control" id="darkColor" name="darkColor" value="#000000">
+                  </div>
+                  <button type="submit" class="btn btn-primary">Generate Checkerboard</button>
+               </form>
+            </div>
+         </div>
+      </div>
+      <div id="boardContainer"></div>
+      <script>
+         document.getElementById('configForm').addEventListener('submit', function(event) {
+             event.preventDefault();
+             generateCheckerboard();
+         });
+         
+         function generateCheckerboard() {
+             const rows = parseInt(document.getElementById('rows').value);
+             const cols = parseInt(document.getElementById('cols').value);
+             const lightColor = document.getElementById('lightColor').value;
+             const darkColor = document.getElementById('darkColor').value;
+         
+             let boardHTML = '<div class="board">';
+             for (let i = 0; i < rows; i++) {
+                 boardHTML += '<div class="row">';
+                 for (let j = 0; j < cols; j++) {
+                     const squareColor = (i + j) % 2 === 0 ? lightColor : darkColor;
+                     boardHTML += `<div class="square" style="background-color: ${squareColor};"></div>`;
+                 }
+                 boardHTML += '</div>';
+             }
+             boardHTML += '</div>';
+         
+             document.getElementById('boardContainer').innerHTML = boardHTML;
+         }
+      </script>
+   </body>
+</html>
