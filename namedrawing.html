@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Name Drawing Application</title>
+      <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+      <style>
+         header {
+         text-align: center;
+         padding: 20px
+         }
+         body {
+         font-family: Arial, sans-serif;
+         text-align: center;
+         }
+         canvas {
+         border: 2px solid black;
+         margin: 20px auto;
+         }
+         label {
+         margin: 10px;
+         font-weight: bold;
+         }
+      </style>
+   </head>
+   <body>
+      <header>
+         <h3>Task#13 Name Drawing Application <br> Team-Code bridge</h3>
+      </header>
+      <div class="container">
+         <h1 class="mt-5">Draw Name:</h1>
+         <form id="drawingForm">
+            <div class="form-group">
+               <label for="name">Name:</label>
+               <input type="text" class="form-control" id="name" required>
+            </div>
+            <div class="form-group">
+               <label for="fontStyle">Font Style:</label>
+               <select class="form-control" id="fontStyle" required>
+                  <option value="Arial">Arial</option>
+                  <option value="Brush Script MT">Brush Script MT</option>
+                  <option value="Georgia">Georgia</option>
+                  <option value="Times New Roman">Times New Roman</option>
+                  <option value="Courier New">Courier New</option>
+               </select>
+            </div>
+            <div class="form-group">
+               <label for="color">Color:</label>
+               <input type="color" class="form-control" id="color" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Enter</button>
+         </form>
+         <canvas id="canvas" width="400" height="200"></canvas>
+      </div>
+      <script>
+         const form = document.getElementById('drawingForm');
+         form.addEventListener('submit', e => {
+             e.preventDefault();
+             const { value: name } = document.getElementById('name');
+             const { value: fontStyle } = document.getElementById('fontStyle');
+             const { value: color } = document.getElementById('color');
+             const canvas = document.getElementById('canvas');
+             const ctx = canvas.getContext('2d');
+             ctx.clearRect(0, 0, canvas.width, canvas.height);
+             ctx.font = `bold 30px ${fontStyle}`;
+             ctx.fillStyle = color;
+             const textWidth = ctx.measureText(name).width;
+             const x = (canvas.width - textWidth) / 2;
+             const y = canvas.height / 2;
+             ctx.fillText(name, x, y);
+         });
+      </script>
+   </body>
+</html>
