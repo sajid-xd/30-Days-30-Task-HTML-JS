@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagonal Circles</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        header {
+            text-align: center;
+            padding: 20px
+        }
+
+        canvas {
+            border: 2px solid black;
+            margin-bottom: 20px;
+        }
+
+        input[type="color"] {
+            width: 40px;
+            height: 40px;
+            margin: 0 5px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h3>Task#15 (Diagonal Circles) "Team-Code bridge"</h3>
+    </header>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <canvas id="canvas" width="600" height="400"></canvas>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <form id="inputForm">
+                    <div class="form-group">
+                        <label for="circleCount">Number of Circles:</label>
+                        <input type="number" class="form-control" id="circleCount" name="circleCount" min="1" max="5"
+                            value="5">
+                    </div>
+                    <div class="form-group" id="colorPickers">
+                        <label>Circle Colors:</label><br>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enter</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const form = document.getElementById('inputForm');
+
+        // form event listener
+
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+            const circleCount = parseInt(document.getElementById('circleCount').value);
+            const colorPickers = document.querySelectorAll('input[type="color"]');
+            const colors = Array.from(colorPickers).map(picker => picker.value);
+            drawCircles(circleCount, colors);
+        });
+
+        // function draw circles
+
+        function drawCircles(count, colors) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const centerX = canvas.width / (count + 1);
+            const centerY = canvas.height / (count + 1);
+            for (let i = 0; i < count; i++) {
+                ctx.beginPath();
+                ctx.arc(centerX * (i + 1), centerY * (i + 1), 50, 0, Math.PI * 2);
+                ctx.fillStyle = colors[i % colors.length];
+                ctx.fill();
+                ctx.closePath();
+            }
+        }
+
+        // function color picker
+
+        function createColorPickers(count) {
+            const colorContainer = document.getElementById('colorPickers');
+            colorContainer.innerHTML = '';
+            for (let i = 0; i < count; i++) {
+                const colorPickerGroup = document.createElement('div');
+                colorPickerGroup.classList.add('input-group', 'mb-3');
+                colorPickerGroup.innerHTML = `
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Color ${i + 1}</span>
+                    </div>
+                    <input type="color" class="form-control" id="color${i + 1}" name="color${i + 1}" value="#000000">
+                `;
+                colorContainer.appendChild(colorPickerGroup);
+            }
+        }
+
+        createColorPickers(5);
+    </script>
+</body>
+
+</html>
