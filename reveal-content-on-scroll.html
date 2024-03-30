@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scroll Reveal</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* Additional custom styles can be added here */
+    .status-bar {
+      background-color: #007bff;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+    .hidden {
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+    .visible {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+<div class="status-bar">Scroll down to reveal hidden content</div>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+       <div class="container" style="text-align: center;">
+         <h3>Task#19</h3>
+         <h4> (Reveal Elements/Content on Scroll) </h4>
+         <h4>"Team-Code bridge"</h4>
+       </div>
+     <div class="container hidden">
+                    <br>
+                    <div class="card bg-primary text-white">
+                      <div class="card-body">Hidden Part</div>
+                    </div>
+                    <br>
+                    <div class="card bg-primary text-white">
+                      <div class="card-body">Hidden Part</div>
+                    </div>
+                    <br>
+                    <div class="card bg-primary text-white">
+                      <div class="card-body">Hidden Part</div>
+                    </div>
+                    <br>
+                    <div class="card bg-primary text-white">
+                      <div class="card-body">Hidden Part</div>
+                    </div>
+                    <br>
+                    <div class="card bg-primary text-white">
+                      <div class="card-body">Hidden Part</div>
+                    </div>
+                    <br>
+                    <div class="card bg-primary text-white">
+                      <div class="card-body">Hidden Part</div>
+                    </div>
+                    <br>
+                    <div class="card bg-primary text-white">
+                      <div class="card-body">Hidden Part</div>
+                    </div>
+                    <br>
+                    <div class="card bg-primary text-white">
+                      <div class="card-body">Hidden Part</div>
+                    </div>
+                    <br>
+      </div>
+      <div class="container">
+                    
+                    <div class="card bg-success text-white">
+                      <div class="card-body">Already visible </div>
+                    </div>
+                    <br>
+                    <div class="card bg-success text-white">
+                      <div class="card-body">Already visible </div>
+                    </div>
+                    <br>
+                    <div class="card bg-success text-white">
+                      <div class="card-body">Already visible </div>
+                    </div>
+                    <br>
+                    <div class="card bg-success text-white">
+                      <div class="card-body">Already visible </div>
+                    </div>
+                    <br>
+                    <div class="card bg-success text-white">
+                      <div class="card-body">Already visible </div>
+                    </div>
+                    <br>
+                    <div class="card bg-success text-white">
+                      <div class="card-body">Already visible </div>
+                    </div>
+                    <br>
+                    <div class="card bg-success text-white">
+                      <div class="card-body">Already visible </div>
+                    </div>
+                    <br>
+                    <div class="card bg-success text-white">
+                      <div class="card-body">Already visible </div>
+                    </div>
+                    <br>
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+<script>
+
+  // Update status bar message based on scroll position
+  const statusBar = document.querySelector('.status-bar');
+  const hiddenParagraphs = document.querySelectorAll('.hidden');
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      statusBar.textContent = 'You are scrolling';
+      // Add class 'visible' to each hidden paragraph
+      hiddenParagraphs.forEach(paragraph => {
+        paragraph.classList.add('visible');
+      });
+    } else {
+      statusBar.textContent = 'Scroll down to reveal hidden content';
+    }
+  });
+</script>
+
+</body>
+</html>
