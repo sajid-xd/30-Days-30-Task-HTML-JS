@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ Accordion</title>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<style>
+  header {
+         text-align: center;
+         padding: 20px;
+         }
+  .accordion-item {
+    border-bottom: 1px solid rgba(0,0,0,.125);
+    margin-bottom: 10px;
+  }
+  .accordion-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+  .accordion-header {
+    cursor: pointer;
+    padding: 10px 15px;
+    background-color: #f8f9fa;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+  }
+  .accordion-header:focus {
+    outline: none;
+    box-shadow: none;
+  }
+  .accordion-content {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.3s ease-out;
+    border: 1px solid rgba(0,0,0,.125);
+    border-top: none;
+    border-radius: 0 0 .25rem .25rem;
+  }
+  .accordion-content.show {
+    max-height: 1000px;
+  }
+</style>
+</head>
+<body>
+  <header>
+    <h3>Task#17 (Accordion for FAQ Section) "Team-Code bridge"</h3>
+ </header>
+<div class="container">
+  <div id="accordion">
+    <div class="accordion-item">
+      <div class="accordion-header" data-toggle="collapse" data-target="#faq1">
+        <h5 class="mb-0">What Color Of Your Bugatti "Click"</h5>
+      </div>
+      <div id="faq1" class="accordion-content collapse">
+        <div class="card-body">
+          PURPLE
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <div class="accordion-header" data-toggle="collapse" data-target="#faq2">
+        <h5 class="mb-0">What Color Of Your Lambo "Click"</h5>
+      </div>
+      <div id="faq2" class="accordion-content collapse">
+        <div class="card-body">
+          ORANGE
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $('.accordion-header').click(function(){
+      $('.accordion-content.show').collapse('hide');
+      $(this).next('.accordion-content').collapse('toggle');
+    });
+  });
+</script>
+
+</body>
+</html>
