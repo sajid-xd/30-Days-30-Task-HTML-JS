@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Countdown Timer</title>
+
+      <style>
+         header {
+         text-align: center;
+         font-size: 25px;
+         }
+         .countdown-container {
+         max-width: 600px;
+         margin: 220px auto;
+         padding: 20px;
+         box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+         }
+         #countdown {
+         font-size: 2em;
+         margin-bottom: 20px;
+         }
+         input[type="datetime-local"] {
+         margin: 15px;
+         font-size: 25px;
+         }
+         label[for="datetime"] {
+         font-size: 20px;
+         }
+         button {
+         padding: 10px 20px;
+         background-color: #007bff;
+         color: #fff;
+         border: none;
+         border-radius: 5px;
+         cursor: pointer;
+         }
+         button:hover {
+         background-color: black;
+         }
+      </style>
+      
+   </head>
+   <body>
+
+      <header>
+         <h3>Task#18 (Countdown Timer) "Team-Code bridge"</h3>
+      </header>
+
+      <div class="countdown-container">
+         <h1>Countdown Timer</h1>
+         <div id="countdown"></div>
+         <label for="datetime">Enter date and time:</label>
+         <input type="datetime-local" id="datetime">
+         <button onclick="startCountdown()">Start</button>
+      </div>
+
+      <script>
+         function startCountdown() {
+         var inputDate = document.getElementById('datetime').value;
+         if (!inputDate) {
+         alert("Please select a date and time.");
+         return;
+         }
+         var countdownElement = document.getElementById('countdown');
+         var inputDateObj = new Date(inputDate);
+         var countdownInterval = setInterval(function () {
+         var currentDate = new Date().getTime();
+         var timeLeft = inputDateObj - currentDate;
+         if (timeLeft <= 0) {
+         clearInterval(countdownInterval);
+         countdownElement.innerHTML = 'Countdown expired!';
+         } else {
+         var days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+         var hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+         var minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+         var seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+         countdownElement.innerHTML = days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's';
+         }
+         }, 1000);
+         }
+      </script>
+
+   </body>
+</html>
