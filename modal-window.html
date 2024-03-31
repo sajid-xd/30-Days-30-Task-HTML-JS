@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Custom Modal</title>
+      <style>
+         body{
+         font-family: Arial, Helvetica, sans-serif;
+         }
+         header {
+         text-align: center;
+         font-size: 25px;
+         }
+         .buttun {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         height: 60vh;
+         }
+         .modal {
+         display: none;
+         position: fixed;
+         z-index: 1;
+         left: 0;
+         top: 0;
+         width: 100%;
+         height: 100%;
+         overflow: auto;
+         background-color: rgba(0, 0, 0, 0.5);
+         }
+         .modal-content {
+         background-color: #fefefe;
+         margin: 10% auto;
+         padding: 20px;
+         border-radius: 5px;
+         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+         width: 60%;
+         max-width: 500px;
+         text-align: center;
+         }
+         .close {
+         color: rgb(255, 0, 0);
+         float: right;
+         font-size: 28px;
+         font-weight: bold;
+         transition: 0.3s;
+         }
+         .close:hover,
+         .close:focus {
+         color: black;
+         text-decoration: none;
+         cursor: pointer;
+         }
+         #openModalBtn {
+         background-color: #c015d6;
+         font-weight: bold;
+         padding: 10px 20px;
+         border: none;
+         border-radius: 5px;
+         cursor: pointer;
+         font-size: 16px;
+         transition: background-color 0.3s;
+         width: 300px;
+         height: 80px;
+         }
+         #openModalBtn:hover {
+         background-color: #45a049;
+         }
+         #modalImg {
+         max-width: 100%;
+         height: auto;
+         border-radius: 5px;
+         }
+      </style>
+   </head>
+   <body>
+
+      <header>
+         <h3>Task#20 (Custom Modal Window) "Team-Code bridge"</h3>
+      </header>
+
+      <div class="buttun">
+         <button id="openModalBtn">Open Modal</button>
+      </div>
+
+      <div id="modal" class="modal">
+         <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Xbox Official</h2>
+            <img id="modalImg" src="https://images.pexels.com/photos/194511/pexels-photo-194511.jpeg?cs=srgb&dl=pexels-lalesh-aldarwish-194511.jpg&fm=jpg" alt="Modal Image">
+            <p>Xbox is a video gaming brand that consists of five home video game consoles, as well as applications (games), streaming service Xbox Cloud Gaming, and online services such as the Xbox network and Xbox Game Pass. The brand is produced by Microsoft Gaming, a division of Microsoft.
+            </p>
+         </div>
+      </div>
+
+      <script>
+         var modal = document.getElementById("modal");
+         var btn = document.getElementById("openModalBtn");
+         var span = document.getElementsByClassName("close")[0];
+         
+         btn.onclick = function() {
+             modal.style.display = "block";
+         }
+         
+         span.onclick = function() {
+             modal.style.display = "none";
+         }
+         
+         window.onclick = function(event) {
+             if (event.target == modal) {
+                 modal.style.display = "none";
+             }
+         }
+      </script>
+      
+   </body>
+</html>
