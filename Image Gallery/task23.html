@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    <link rel="stylesheet" href="./task23.css">
+</head>
+<body>
+
+    <header>
+        <h3>Task#23 (Interactive Image Gallery) "Team-Code bridge"</h3>
+    </header>
+
+    <div class="gallery">
+        <div class="thumbnails">
+            <img src="./img/1.png" alt="Thumbnail 1" onclick="openLightbox(this.src)">
+            <img src="./img/2.jpg" alt="Thumbnail 2" onclick="openLightbox(this.src)">
+            <img src="./img/3.jpeg" alt="Thumbnail 3" onclick="openLightbox(this.src)">
+            <img src="./img/4.jpg" alt="Thumbnail 4" onclick="openLightbox(this.src)">
+            <img src="./img/5.jpg" alt="Thumbnail 5" onclick="openLightbox(this.src)">
+            <img src="./img/6.webp" alt="Thumbnail 6" onclick="openLightbox(this.src)">
+        </div>
+        <div id="lightbox" class="lightbox">
+            <span class="close" onclick="closeLightbox()">&times;</span>
+            <img src="" alt="Larger Image" id="lightbox-image">
+            <div class="slide-button slide-button-left" onclick="moveToPreviousImage()">&#10094;</div>
+            <div class="slide-button slide-button-right" onclick="moveToNextImage()">&#10095;</div>
+        </div>
+    </div>
+    <script src="./task23.js"></script>
+</body>
+</html>
